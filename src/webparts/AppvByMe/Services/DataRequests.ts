@@ -40,7 +40,6 @@ const getImgStatus = (formStatus: string) =>{
       imgStatusText = 'Rejected by Superintendent';
       break;
     case 'New':
-
       imgStatusName = 'new.svg';
       imgStatusText = 'New';
       break;
@@ -76,7 +75,7 @@ const getListItems = async (context: WebPartContext, listUrl: string, listName: 
 
   //const responseUrl = `${listUrl}/_api/web/Lists/GetByTitle('${listName}')/items?$orderby=Created desc&$select=Created,Id,Form_x0020_Title,FormStatus,FullName1,FormDetail,DeptSubDeptGroupings,Author/EMail&$expand=Author&$top=${pageSize}&$filter=BoardEmail eq '${currUserEmail}' or Author/EMail eq '${currUserEmail}'`;
 
-  const responseUrl = `${listUrl}/_api/web/Lists/GetByTitle('${listName}')/items?$top=${pageSize}`;
+  const responseUrl = `${listUrl}/_api/web/Lists/GetByTitle('${listName}')/items?$top=${pageSize}&$orderby=Created desc&$select=Created,FormStatus,Id,Title,Form_x0020_Title,DeptSubDeptGroupings,FullName1,FormDetail,Approver1Per/EMail,Approver2Per/EMail&$expand=Approver1Per,Approver2Per&$filter=Approver1Per/EMail eq '${currUserEmail}' or Approver2Per/EMail eq '${currUserEmail}'`; //&$filter=Approver1Per/EMail eq '${currUserEmail}'
   
   try{
 
@@ -85,14 +84,15 @@ const getListItems = async (context: WebPartContext, listUrl: string, listName: 
     if (response.ok){
       const results = await response.json();
       if(results){
+        console.log("results", results);
         results.value.map((item: any)=>{
           listData.push({
             id: item.Id,
-            title: item.Title || "",
-            //title: item.Form_x0020_Title || "",
-            formStatus: item.Status || "",
-            formImgStatus: getImgStatus(item.Status)[0],
-            formTextStatus: getImgStatus(item.Status)[1],
+            //title: item.Title || "",
+            title: item.Form_x0020_Title || "",
+            formStatus: item.FormStatus || "",
+            formImgStatus: getImgStatus(item.FormStatus)[0],
+            formTextStatus: getImgStatus(item.FormStatus)[1],
             fullName: item.FullName1 || "",
             formDetails: item.FormDetail || "",
             deptGrp: item.DeptSubDeptGroupings ? item.DeptSubDeptGroupings.substring(0, item.DeptSubDeptGroupings.indexOf('|')) : "",
@@ -100,7 +100,9 @@ const getListItems = async (context: WebPartContext, listUrl: string, listName: 
             listUrl: listUrl,
             listName: listName,
             listDisplayName: listDisplayName,
-            created: item.Created
+            created: item.Created,
+            approver1: item.Approver1Per ? item.Approver1Per.EMail || "" : "",
+            approver2: item.Approver2Per ? item.Approver2Per.EMail || "" : "",
           });
         });
       }
@@ -113,6 +115,7 @@ const getListItems = async (context: WebPartContext, listUrl: string, listName: 
     console.log("Form Response Error: " + error);
   }
   
+  console.log("listData", listData);
 
   return listData;
 };
