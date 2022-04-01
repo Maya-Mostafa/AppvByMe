@@ -8,11 +8,16 @@ const getImgStatus = (formStatus: string) =>{
       imgStatusName = 'completed.svg';
       imgStatusText = 'Completed';
       break;
+    case 'Collecting_Feedback':
+      imgStatusName = 'collectingFeedback.svg';
+      imgStatusText = 'Collecting Feedback';
+      break;
     case 'Department_Accepted':
       imgStatusName = 'deptAccepted.svg';
       imgStatusText = 'Accepted by the Department';
       break;
     case 'Department_Rejected':
+    case 'Auditor_Rejected':
       imgStatusName = 'deptRejected.svg';
       imgStatusText = 'Rejected by the Department';
       break;
@@ -21,15 +26,32 @@ const getImgStatus = (formStatus: string) =>{
       imgStatusText = 'Accepted by Approver';
       break;
     case 'Approver1_Rejected':
+    case 'Approver_Rejected':
       imgStatusName = 'personRejected.svg';
       imgStatusText = 'Rejected by Approver';
       break;
-    case 'Submitted':
-    case 'Approver1_Inprogress':
-    case 'Superintendent_Inprogress':
-    case 'Department_Inprogress':
+    case 'Employee_Rejected':
+      imgStatusName = 'personRejected.svg';
+      imgStatusText = 'Rejected by Employee';
+      break;
+    case 'Pending_Employee_Approval':
       imgStatusName = 'submitted.svg';
-      imgStatusText = 'In Progress for Approval';
+      imgStatusText = 'Pending Employee Approval';
+      break;
+    case 'Submitted':
+    case 'Pending_Approver_Approval':
+    case 'Approver1_Inprogress':
+      imgStatusName = 'submitted.svg';
+      imgStatusText = 'Pending Approver Approval';
+      break;
+    case 'Superintendent_Inprogress':
+      imgStatusName = 'submitted.svg';
+      imgStatusText = 'Pending Superintendent Approval';
+      break;
+    case 'Department_Inprogress':
+    case 'Pending_Auditor_Approval':
+      imgStatusName = 'submitted.svg';
+      imgStatusText = 'Pending Department Approval';
       break;
     case 'Superintendent_Accepted':
       imgStatusName = 'superAccepted.svg';
