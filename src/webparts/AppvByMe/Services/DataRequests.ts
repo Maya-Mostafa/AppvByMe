@@ -167,7 +167,7 @@ export const readAllLists = async (context: WebPartContext, listUrl: string, lis
         
       }
     }else{
-      alert("Forms Error: " + listUrl + listName + ' - ' + response.statusText);
+      console.log("Forms Error: " + listUrl + listName + ' - ' + response.statusText);
       return [];
     }
   }catch(error){
