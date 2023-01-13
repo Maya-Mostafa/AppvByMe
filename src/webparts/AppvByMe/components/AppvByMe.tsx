@@ -16,6 +16,7 @@ export default function MyTasks (props: IAppvByMeProps){
     formStatus: {key: "", text: ""},
     formDetails: ""
   });
+  const queryParams = new URLSearchParams(window.location.search);
 
   React.useEffect(()=>{
     readAllLists(props.context, props.listUrl, props.listName, props.pageSize).then((r: any) =>{
@@ -31,6 +32,15 @@ export default function MyTasks (props: IAppvByMeProps){
       
       setListItems(r.flat());
       setPreloaderVisible(false);
+
+      const formTitleParam = queryParams.get("formTitle");
+      if (queryParams.has("formTitle")){
+        setFilterFields(prevState =>({
+          ...prevState,
+          ["title"] : {key: formTitleParam, text: formTitleParam}
+        }));
+      }
+
     });
   }, []);
 
@@ -40,6 +50,13 @@ export default function MyTasks (props: IAppvByMeProps){
         ...filterFields,
         [fieldNameParam] : text || ""
       });
+      if(fieldNameParam === "title"){
+        if(text == undefined) window.history.replaceState({}, '', `${location.pathname}`);
+        else{
+          if (queryParams.has('formTitle')) queryParams.delete('formTitle');
+          window.history.replaceState({}, '', `${location.pathname}?formTitle=${text.text}`);
+        }
+      }
     };
   };
   
