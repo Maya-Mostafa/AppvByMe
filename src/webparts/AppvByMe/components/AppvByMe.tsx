@@ -19,7 +19,7 @@ export default function MyTasks (props: IAppvByMeProps){
   const queryParams = new URLSearchParams(window.location.search);
 
   React.useEffect(()=>{
-    readAllLists(props.context, props.listUrl, props.listName, props.pageSize).then((r: any) =>{
+    readAllLists(props.context, props.listUrl, props.listName, props.pageSize, props.testingEmail).then((r: any) =>{
       const listItemsForms = [];
       r.map(i=>{
         if(i.length > 0)

@@ -33,7 +33,8 @@
       "showHelpMsg" : false,
       "helpMsgTxt": "Tips: Please enter into the fields above to customize your search. When searching please enter information into multiple fields to find a specific result.",
       "helpMsgLink": "",
-      "helpMsgLinkTxt": "If you need help please click instructions in upper right corner.​"
+      "helpMsgLinkTxt": "If you need help please click instructions in upper right corner.​",
+      "testingEmail":""
     }
   }]
 }

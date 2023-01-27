@@ -24,6 +24,7 @@ export interface IAppvByMeWebPartProps {
   helpMsgTxt: string;
   helpMsgLink: string;
   helpMsgLinkTxt: string;
+  testingEmail: string;
 }
 
 export default class AppvByMeWebPart extends BaseClientSideWebPart<IAppvByMeWebPartProps> {
@@ -43,7 +44,8 @@ export default class AppvByMeWebPart extends BaseClientSideWebPart<IAppvByMeWebP
         showHelpMsg: this.properties.showHelpMsg,
         helpMsgTxt: this.properties.helpMsgTxt,
         helpMsgLink: this.properties.helpMsgLink,
-        helpMsgLinkTxt: this.properties.helpMsgLinkTxt
+        helpMsgLinkTxt: this.properties.helpMsgLinkTxt,
+        testingEmail: this.properties.testingEmail
       }
     );
 
@@ -122,6 +124,15 @@ export default class AppvByMeWebPart extends BaseClientSideWebPart<IAppvByMeWebP
                 PropertyPaneTextField('helpMsgLink', {
                   label: 'Link',
                   value: this.properties.helpMsgLink
+                }),
+              ]
+            },
+            {
+              groupName: "Testing Purpose",
+              groupFields: [
+                PropertyPaneTextField('testingEmail', {
+                  label: 'Email',
+                  value: this.properties.testingEmail
                 }),
               ]
             },

@@ -15,4 +15,5 @@ export interface IAppvByMeProps {
   helpMsgTxt: string;
   helpMsgLink: string;
   helpMsgLinkTxt: string;
+  testingEmail: string;
 }

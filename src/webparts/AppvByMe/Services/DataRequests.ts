@@ -79,10 +79,10 @@ const getImgStatus = (formStatus: string) =>{
   return [imgStatusName, imgStatusText];
 };
 
-const getListItems = async (context: WebPartContext, listUrl: string, listName: string, listDisplayName: string, pageSize: number) =>{
+const getListItems = async (context: WebPartContext, listUrl: string, listName: string, listDisplayName: string, pageSize: number, testingEmail: string) =>{
   
   const listData: any = [];
-  const currUserEmail = context.pageContext.user.email;
+  const currUserEmail = testingEmail ? testingEmail : context.pageContext.user.email;
   const currUserDisplayName = context.pageContext.user.displayName;
 
   //Hard-coded - for testing purposes --Start
@@ -142,7 +142,7 @@ const getListItems = async (context: WebPartContext, listUrl: string, listName: 
   return listData;
 };
 
-export const readAllLists = async (context: WebPartContext, listUrl: string, listName: string, pageSize: number) =>{
+export const readAllLists = async (context: WebPartContext, listUrl: string, listName: string, pageSize: number, testingEmail: string) =>{
   const listData: any = [];
   let aggregatedListsPromises : any = [];
   const responseUrl = `${listUrl}/_api/web/Lists/GetByTitle('${listName}')/items`;
@@ -162,7 +162,7 @@ export const readAllLists = async (context: WebPartContext, listUrl: string, lis
         });
       
         listData.map((listItem: any)=>{
-          aggregatedListsPromises = aggregatedListsPromises.concat(getListItems(context, listItem.listUrl, listItem.listName, listItem.listDisplayName, pageSize));
+          aggregatedListsPromises = aggregatedListsPromises.concat(getListItems(context, listItem.listUrl, listItem.listName, listItem.listDisplayName, pageSize, testingEmail));
         });
         
       }
