@@ -79,11 +79,14 @@ const getImgStatus = (formStatus: string) =>{
   return [imgStatusName, imgStatusText];
 };
 
-const getListItems = async (context: WebPartContext, listUrl: string, listName: string, listDisplayName: string, pageSize: number, testingEmail: string) =>{
+const getListItems = async (context: WebPartContext, listItem: any, pageSize: number, testingEmail: string) =>{
   
   const listData: any = [];
   const currUserEmail = testingEmail ? testingEmail : context.pageContext.user.email;
   const currUserDisplayName = context.pageContext.user.displayName;
+
+  const {listName, listDisplayName, listUrl, listFilterField} = listItem;
+  //console.log("listFilterField", listFilterField);
 
   //Hard-coded - for testing purposes --Start
   //const currUserEmail = 'rachel.marshall@peelsb.com';
@@ -97,7 +100,8 @@ const getListItems = async (context: WebPartContext, listUrl: string, listName: 
 
   //const responseUrl = `${listUrl}/_api/web/Lists/GetByTitle('${listName}')/items?$orderby=Created desc&$select=Created,Id,Form_x0020_Title,FormStatus,FullName1,FormDetail,DeptSubDeptGroupings,Author/EMail&$expand=Author&$top=${pageSize}&$filter=BoardEmail eq '${currUserEmail}' or Author/EMail eq '${currUserEmail}'`;
 
-  const responseUrl = `${listUrl}/_api/web/Lists/GetByTitle('${listName}')/items?$top=${pageSize}&$orderby=Created desc&$select=Created,FormStatus,Id,Title,Form_x0020_Title,DeptSubDeptGroupings,FullName1,FormDetail,Approver1Per/EMail,Approver2Per/EMail&$expand=Approver1Per,Approver2Per&$filter=Approver1Per/EMail eq '${currUserEmail}' or Approver2Per/EMail eq '${currUserEmail}'`; //&$filter=Approver1Per/EMail eq '${currUserEmail}'
+  // const responseUrl = `${listUrl}/_api/web/Lists/GetByTitle('${listName}')/items?$top=${pageSize}&$orderby=Created desc&$select=Created,FormStatus,Id,Title,Form_x0020_Title,DeptSubDeptGroupings,FullName1,FormDetail,Approver1Per/EMail,Approver2Per/EMail&$expand=Approver1Per,Approver2Per&$filter=Approver1Per/EMail eq '${currUserEmail}' or Approver2Per/EMail eq '${currUserEmail}'`; //&$filter=Approver1Per/EMail eq '${currUserEmail}'
+  const responseUrl = `${listUrl}/_api/web/Lists/GetByTitle('${listName}')/items?$top=${pageSize}&$orderby=Created desc&$select=Created,FormStatus,Id,Title,Form_x0020_Title,DeptSubDeptGroupings,FullName1,FormDetail&$filter=${listFilterField} eq '${currUserEmail}'`; 
   
   try{
 
@@ -123,8 +127,8 @@ const getListItems = async (context: WebPartContext, listUrl: string, listName: 
             listName: listName,
             listDisplayName: listDisplayName,
             created: item.Created,
-            approver1: item.Approver1Per ? item.Approver1Per.EMail || "" : "",
-            approver2: item.Approver2Per ? item.Approver2Per.EMail || "" : "",
+            // approver1: item.Approver1Per ? item.Approver1Per.EMail || "" : "",
+            // approver2: item.Approver2Per ? item.Approver2Per.EMail || "" : "",
           });
         });
       }
@@ -157,12 +161,13 @@ export const readAllLists = async (context: WebPartContext, listUrl: string, lis
           listData.push({
             listName: item.Title,
             listDisplayName: item.ListDisplayName,
-            listUrl: item.ListUrl
+            listUrl: item.ListUrl,
+            listFilterField: item.FilterFieldName
           });
         });
       
         listData.map((listItem: any)=>{
-          aggregatedListsPromises = aggregatedListsPromises.concat(getListItems(context, listItem.listUrl, listItem.listName, listItem.listDisplayName, pageSize, testingEmail));
+          aggregatedListsPromises = aggregatedListsPromises.concat(getListItems(context, listItem, pageSize, testingEmail));
         });
         
       }
