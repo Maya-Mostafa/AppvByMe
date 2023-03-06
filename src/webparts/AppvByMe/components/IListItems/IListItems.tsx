@@ -33,7 +33,12 @@ export default function IListItems (props: IListItemsProps) {
         isResizable: true,
         render : (item: any) => (
         <div>
-            <a className={styles.defautlLink} target="_blank" data-interception="off" href={`${item.listUrl}/Lists/${item.listName}/DispForm.aspx?ID=${item.id}`}>{item.title}</a>
+            {/* <a className={styles.defautlLink} target="_blank" data-interception="off" href={`${item.listUrl}/Lists/${item.listName}/DispForm.aspx?ID=${item.id}`}>{item.title}</a> */}
+            {item.fileRef.toLowerCase().indexOf('.xml') !== -1 ? 
+                <a className={styles.defautlLink} target="_blank" data-interception="off" href={item.fileRef}>{item.title}</a>
+            :
+                <a className={styles.defautlLink} target="_blank" data-interception="off" href={`${item.listUrl}/Lists/${item.listName}/DispForm.aspx?ID=${item.id}`}>{item.title}</a>
+            }
         </div>
         )
     },
