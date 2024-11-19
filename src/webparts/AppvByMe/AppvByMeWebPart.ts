@@ -4,7 +4,8 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
-  PropertyPaneCheckbox
+  PropertyPaneCheckbox,
+  PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
@@ -25,6 +26,15 @@ export interface IAppvByMeWebPartProps {
   helpMsgLink: string;
   helpMsgLinkTxt: string;
   testingEmail: string;
+
+  showStyledBorder: boolean;
+  showAltRowsColors: boolean;
+  showOutsideBorders: boolean;
+  showShadedHeading: boolean;
+  showBorderHeading: boolean;
+  showRowSeparators: boolean;
+  showRoundedBorders: boolean;
+  colorTheme: string;
 }
 
 export default class AppvByMeWebPart extends BaseClientSideWebPart<IAppvByMeWebPartProps> {
@@ -45,7 +55,16 @@ export default class AppvByMeWebPart extends BaseClientSideWebPart<IAppvByMeWebP
         helpMsgTxt: this.properties.helpMsgTxt,
         helpMsgLink: this.properties.helpMsgLink,
         helpMsgLinkTxt: this.properties.helpMsgLinkTxt,
-        testingEmail: this.properties.testingEmail
+        testingEmail: this.properties.testingEmail,
+
+        showStyledBorder: this.properties.showStyledBorder,
+        showAltRowsColors: this.properties.showAltRowsColors,
+        showOutsideBorders: this.properties.showOutsideBorders,
+        showShadedHeading: this.properties.showShadedHeading,
+        showBorderHeading: this.properties.showBorderHeading,
+        showRowSeparators: this.properties.showRowSeparators,
+        showRoundedBorders: this.properties.showRoundedBorders,
+        colorTheme: this.properties.colorTheme,
       }
     );
 
@@ -136,6 +155,52 @@ export default class AppvByMeWebPart extends BaseClientSideWebPart<IAppvByMeWebP
                 }),
               ]
             },
+            {
+              groupName: "Display",
+              groupFields:[
+                PropertyPaneCheckbox('showStyledBorder', {
+                  text: 'Show styled border box around the filter fields',
+                  checked: this.properties.showStyledBorder
+                }),   
+                PropertyPaneCheckbox('showAltRowsColors', {
+                  text: 'Show alternating row colors ',
+                  checked: this.properties.showAltRowsColors
+                }),   
+                PropertyPaneCheckbox('showOutsideBorders', {
+                  text: 'Show outer borders',
+                  checked: this.properties.showOutsideBorders
+                }),  
+                PropertyPaneCheckbox('showShadedHeading', {
+                  text: 'Show shaded headers',
+                  checked: this.properties.showShadedHeading
+                }),  
+                PropertyPaneCheckbox('showBorderHeading', {
+                  text: 'Show header bottom border',
+                  checked: this.properties.showBorderHeading
+                }),  
+                PropertyPaneCheckbox('showRowSeparators', {
+                  text: 'Show row separators',
+                  checked: this.properties.showRowSeparators
+                }),
+                PropertyPaneCheckbox('showRoundedBorders', {
+                  text: 'Use rounded borders',
+                  checked: this.properties.showRoundedBorders
+                }),
+                PropertyPaneDropdown('colorTheme', {
+                  label: 'Color Theme',
+                  options: [
+                    {key: 'defaultColorTheme', text: 'Grey (Default)'},
+                    {key: 'blueColorTheme', text: 'Blue'},
+                    {key: 'greenColorTheme', text: 'Green'},
+                    {key: 'redColorTheme', text: 'Red'},
+                    {key: 'purpleColorTheme', text: 'Purple'},
+                    {key: 'yellowColorTheme', text: 'Yellow'},
+                    {key: 'orangeColorTheme', text: 'Orange'},
+                  ],
+                  selectedKey: this.properties.colorTheme
+                }),
+              ]
+            }
           ]
         }
       ]

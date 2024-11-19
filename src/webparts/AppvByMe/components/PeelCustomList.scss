@@ -1,0 +1,181 @@
+.listCntnr{
+  
+  .ms-DetailsHeader{
+    padding-top: 0;
+    border-bottom-width: 0px;
+  }
+  .ms-DetailsRow{
+    border-bottom: none;
+  }
+
+  &.altRows{
+    .ms-List-cell:nth-child(even){
+      .ms-DetailsRow{
+        background: #f0f0f0;
+      }
+    }
+  }
+
+  &.outsideBorder .ms-DetailsList{
+    border: 1px solid #ddd;
+  }
+  
+  &.shadedHeading .ms-DetailsHeader{
+    background: #f9f9f9;
+  }
+  
+  &.rowSeparators .ms-DetailsRow{
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  &.roundedBorders .ms-DetailsList{
+    border-radius: 7px;
+  }
+
+  &.headerBorder .ms-DetailsHeader{
+    border-bottom-width: 1px;
+  }
+  
+  // &.hoverStylePopout{
+
+  // }
+
+  // &.rowStyleBoxed{
+
+  // }
+  
+}
+
+.blueColorTheme{
+  .listCntnr{  
+    &.altRows{
+      .ms-List-cell:nth-child(even){
+        .ms-DetailsRow{
+          background: #e7f2ff;
+        }
+      }
+    }
+    &.shadedHeading .ms-DetailsHeader{
+      background: #eff5fb;
+    }
+    &.rowSeparators .ms-DetailsRow{
+      border-bottom: 1px solid #e7f2ff;
+    }        
+    .ms-DetailsRow:hover{
+      background: #e7f2ff;
+    }
+  }
+}
+.greenColorTheme{
+  .listCntnr{  
+    &.altRows{
+      .ms-List-cell:nth-child(even){
+        .ms-DetailsRow{
+          background: #e7ffed;
+        }
+      }
+    }
+    &.shadedHeading .ms-DetailsHeader{
+      background: #f3fff6;
+    }
+    &.rowSeparators .ms-DetailsRow{
+      border-bottom: 1px solid #e7ffed;
+    }        
+    .ms-DetailsRow:hover{
+      background: #e7ffed;
+    }
+  }
+}
+.redColorTheme{
+  .listCntnr{  
+    &.altRows{
+      .ms-List-cell:nth-child(even){
+        .ms-DetailsRow{
+          background: #ffe7e7;
+        }
+      }
+    }
+    &.shadedHeading .ms-DetailsHeader{
+      background: #fff2f2;
+    }
+    &.rowSeparators .ms-DetailsRow{
+      border-bottom: 1px solid #ffe7e7;
+    }        
+    .ms-DetailsRow:hover{
+      background: #ffe7e7;
+    }
+  }
+}
+.purpleColorTheme{
+  .listCntnr{  
+    &.altRows{
+      .ms-List-cell:nth-child(even){
+        .ms-DetailsRow{
+          background: #e9e7ff;
+        }
+      }
+    }
+    &.shadedHeading .ms-DetailsHeader{
+      background: #edecfd;
+    }
+    &.rowSeparators .ms-DetailsRow{
+      border-bottom: 1px solid #e9e7ff;
+    }        
+    .ms-DetailsRow:hover{
+      background: #e9e7ff;
+    }
+  }
+}
+.yellowColorTheme{
+  .listCntnr{  
+    &.altRows{
+      .ms-List-cell:nth-child(even){
+        .ms-DetailsRow{
+          background: #ffffe7;
+        }
+      }
+    }
+    &.shadedHeading .ms-DetailsHeader{
+      background: #fffff1;
+    }
+    &.rowSeparators .ms-DetailsRow{
+      border-bottom: 1px solid #ffffe7;
+    }        
+    .ms-DetailsRow:hover{
+      background: #ffffe7;
+    }
+  }
+}
+.orangeColorTheme{
+  .listCntnr{  
+    &.altRows{
+      .ms-List-cell:nth-child(even){
+        .ms-DetailsRow{
+          background: #fff3e7;
+        }
+      }
+    }
+    &.shadedHeading .ms-DetailsHeader{
+      background: #faf2ea;
+    }
+    &.rowSeparators .ms-DetailsRow{
+      border-bottom: 1px solid #fff3e7;
+    }        
+    .ms-DetailsRow:hover{
+      background: #fff3e7;
+    }
+  }
+}
+
+
+.peelCollectionDataListFields {
+  input[placeholder="Header Display Name"]{
+    min-width: 120px;
+  }
+  input[placeholder="Profile Property"]{
+    min-width: 100px;
+  }
+  input[placeholder="Min Width"], input[placeholder="Max Width"]{
+    min-width: 70px;
+  }  
+}

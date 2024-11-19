@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styles from './AppvByMe.module.scss';
+import './PeelCustomList.scss';
 import {Icon, initializeIcons, MessageBar, MessageBarType} from '@fluentui/react';
 import { IAppvByMeProps } from './IAppvByMeProps';
 import {readAllLists, arrayUnique} from  '../Services/DataRequests';
@@ -17,6 +18,16 @@ export default function MyTasks (props: IAppvByMeProps){
     formDetails: ""
   });
   const queryParams = new URLSearchParams(window.location.search);
+
+
+  let gridThemes = '';
+  props.showAltRowsColors ? gridThemes += ' altRows' : '';
+  props.showOutsideBorders ? gridThemes += ' outsideBorder' : '';
+  props.showShadedHeading ? gridThemes += ' shadedHeading'  : '';
+  props.showRowSeparators ? gridThemes += ' rowSeparators'  : '';
+  props.showRoundedBorders ? gridThemes += ' roundedBorders': '';
+  props.showBorderHeading ? gridThemes += ' headerBorder' : '';
+  const colorTheme = props.colorTheme ? props.colorTheme : 'defaultColorTheme';
 
   React.useEffect(()=>{
     readAllLists(props.context, props.listUrl, props.listName, props.pageSize, props.testingEmail).then((r: any) =>{
@@ -72,28 +83,30 @@ export default function MyTasks (props: IAppvByMeProps){
 		<div className={styles.AppvByMe}>
 			<h2>{props.wpTitle}</h2>
 
-			<div className={styles.fieldsAndHelp}>
-				<div className={styles.fieldsSection}>
-					<IFilterFields
-						filterField={filterFields}
-						onChangeFilterField={onChangeFilterField}
-						resetSrch={resetSrch}
-						formTitlesOptions={formTitles}
-					/>
-				</div>
-				{props.showHelp && (
-					<div className={styles.helpSection}>
-						<a
-							href={props.helpLink}
-							title={props.helpTitle}
-							target='_blank'
-							data-interception='off'
-						>
-							<Icon iconName='StatusCircleQuestionMark' />
-						</a>
-					</div>
-				)}
-			</div>
+      <div className={`${props.showStyledBorder ? styles.styledBorder : ''}`}>
+        <div className={styles.fieldsAndHelp}>
+          <div className={styles.fieldsSection}>
+            <IFilterFields
+              filterField={filterFields}
+              onChangeFilterField={onChangeFilterField}
+              resetSrch={resetSrch}
+              formTitlesOptions={formTitles}
+            />
+          </div>
+          {props.showHelp && (
+            <div className={styles.helpSection}>
+              <a
+                href={props.helpLink}
+                title={props.helpTitle}
+                target='_blank'
+                data-interception='off'
+              >
+                <Icon iconName='StatusCircleQuestionMark' />
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
 
 			{props.showHelpMsg && (
 				<MessageBar
@@ -106,11 +119,15 @@ export default function MyTasks (props: IAppvByMeProps){
 				</MessageBar>
 			)}
 
-			<IListItems
-				items={listItems}
-				preloaderVisible={preloaderVisible}
-				filterField={filterFields}
-			/>
+      <div className={`${colorTheme}`}>
+      <div className={`${styles.listCntnr} listCntnr ${gridThemes}`}>
+        <IListItems
+          items={listItems}
+          preloaderVisible={preloaderVisible}
+          filterField={filterFields}
+        />
+      </div>
+      </div>
 		</div>
   );
 }

@@ -16,4 +16,13 @@ export interface IAppvByMeProps {
   helpMsgLink: string;
   helpMsgLinkTxt: string;
   testingEmail: string;
+
+  showStyledBorder: boolean;
+  showAltRowsColors: boolean;
+  showOutsideBorders: boolean;
+  showShadedHeading: boolean;
+  showBorderHeading: boolean;
+  showRowSeparators: boolean;
+  showRoundedBorders: boolean;
+  colorTheme: string;
 }

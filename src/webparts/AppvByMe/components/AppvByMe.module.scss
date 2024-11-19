@@ -84,10 +84,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 25px;
-    border-radius: 4px;
-    padding: 5px 30px 5px 13px;
-    box-shadow: 0px 1px 5px 2px #ddd;
+    // margin-bottom: 25px;
+    // border-radius: 4px;
+    // padding: 5px 30px 5px 13px;
+    // box-shadow: 0px 1px 5px 2px #ddd;
     .fieldsSection{
       display: block;
       width: 85%;
@@ -129,3 +129,59 @@
   }
 }
 
+/* theming styles */
+.listCntnr{
+  position: relative;
+  margin-top: 30px;
+  
+  div[class^="ms-DetailsRow"]{
+    border-bottom: none;
+  }
+
+  &.altRows{
+    div[class^="ms-List-cell"]:nth-child(even){
+      div[class^="ms-DetailsRow"]{
+        background: #f0f0f0;
+      }
+    }
+  }
+  &.outsideBorder div[class^="ms-DetailsList"]:not([class^="ms-DetailsList-headerWrapper"]){
+    border: 1px solid #ddd;
+  }
+  &.shadedHeading div[class^="DetailsHeader"]{
+    background: #f0f0f0;
+  }
+  &.rowSeparators div[class^="ms-DetailsRow"]:not([class^="ms-DetailsRow-cell"]):not([class^="ms-DetailsRow-fields"]){
+    border-bottom: 1px solid #f0f0f0;
+  }
+  &.roundedBorders div[class^="ms-DetailsList"]:not([class^="ms-DetailsList-headerWrapper"]){
+    border-radius: 7px;
+  }
+
+  div[class^="ms-DetailsRow-cell"]{
+    white-space: normal!important;
+  }
+  
+  .listView{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    height: 100vh;
+    
+    div[class^="ms-DetailsRow"]{
+      font-size: 13px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    
+    div[class^="ms-List-cell"]{
+      border-bottom: 1px solid #f0f0f0;
+    }
+  }
+}
+.styledBorder{
+  padding: 10px 20px 20px 20px;
+  border-bottom: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0px 1px 7px 0px #ddd;
+  margin-bottom: 20px;
+}
